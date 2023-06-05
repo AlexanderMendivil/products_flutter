@@ -8,10 +8,10 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Home'),),
+      appBar: AppBar(title: const Text('Home'),),
       body: ListView.builder(
         itemCount: 10,
-        itemBuilder: (BuildContext context, int index) => ProductCard()),
+        itemBuilder: (BuildContext context, int index) => const ProductCard()),
     
     floatingActionButton: FloatingActionButton(onPressed: () {  },
     child: const Icon(Icons.add)),

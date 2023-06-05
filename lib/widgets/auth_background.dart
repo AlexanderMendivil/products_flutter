@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 class AuthBackground extends StatelessWidget {
   final Widget child;
   const AuthBackground({super.key, required this.child});
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: double.infinity,
       height: double.infinity,
       child: Stack(children: [
@@ -28,7 +26,7 @@ class AuthBackground extends StatelessWidget {
 
 
 class _PurpleBox extends StatelessWidget {
-  const _PurpleBox({super.key});
+  const _PurpleBox();
 
   @override
   Widget build(BuildContext context) {
@@ -37,13 +35,13 @@ class _PurpleBox extends StatelessWidget {
       width: double.infinity,
       height: size.height * 0.4,
       decoration: _PurpleBackground(),
-      child: Stack(
-        children: const [
-          Positioned(child: _Bubble(), top: 90, left: 30,),
-          Positioned(child: _Bubble(), top: -40, left: -30,),
-          Positioned(child: _Bubble(), top: -50, right: -20,),
-          Positioned(child: _Bubble(), bottom: -50, left: 10,),
-          Positioned(child: _Bubble(), bottom: 120, right: 20,),
+      child: const Stack(
+        children: [
+          Positioned(top: 90, left: 30,child: _Bubble(),),
+          Positioned(top: -40, left: -30,child: _Bubble(),),
+          Positioned(top: -50, right: -20,child: _Bubble(),),
+          Positioned(bottom: -50, left: 10,child: _Bubble(),),
+          Positioned(bottom: 120, right: 20,child: _Bubble(),),
         ],
         ),
     );
@@ -61,7 +59,7 @@ class _PurpleBox extends StatelessWidget {
 
 
 class _Bubble extends StatelessWidget {
-  const _Bubble({super.key});
+  const _Bubble();
 
   @override
   Widget build(BuildContext context) {
