@@ -17,7 +17,7 @@ class LoginScreen extends StatelessWidget {
             const SizedBox( height: 250 ),
             CardContainer(child: Column(children: [
               const SizedBox(height: 10),
-              Text('Login', style: Theme.of(context).textTheme.headline4,),
+              Text('Login', style: Theme.of(context).textTheme.headlineMedium,),
               const SizedBox(height: 30,),
               ChangeNotifierProvider(create: (_)=> LoginFormProvider(), child: const _LoginForm()),
             ]
@@ -93,6 +93,7 @@ class _LoginForm extends StatelessWidget {
               loginForm.isLoading = true;
               await Future.delayed(const Duration(seconds: 2));
               loginForm.isLoading = false;
+              // ignore: use_build_context_synchronously
               Navigator.pushReplacementNamed(context, 'home');
             },
             child: Container(
