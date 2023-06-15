@@ -17,7 +17,7 @@ class AppState extends StatelessWidget {
     return MultiProvider(providers: [
       ChangeNotifierProvider(create: (_)=>ProductsService())
     ],
-    child: MyApp(),);
+    child: const MyApp(),);
   }
 }
 
