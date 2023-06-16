@@ -8,6 +8,7 @@ import '../models/products.dart';
 class ProductsService extends ChangeNotifier{
   final String _baseUrl = dotenv.get('BASE_URL');
   final List<Product> products = [];
+  late Product selectedProduct;
   bool isLoading = true;
 
   ProductsService(){

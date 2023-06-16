@@ -17,7 +17,7 @@ class ProductCard extends StatelessWidget {
         child: Stack(
           alignment: Alignment.bottomLeft,
           children: [
-            _BackgroundImage(image: product.picture!),
+            _BackgroundImage(image: product.picture),
             _ProductDetails(product: product),
             Positioned(top: 0,right: 0,child: PriceTag(price: product.price,)),
             Positioned(top: 0,left: 0,child: _NotAvailable(available: product.available,)),
@@ -156,7 +156,7 @@ class _ProductDetails extends StatelessWidget {
 }
 
 class _BackgroundImage extends StatelessWidget {
-  final String image;
+  final String? image;
   const _BackgroundImage({required this.image});
 
   @override
@@ -166,8 +166,8 @@ class _BackgroundImage extends StatelessWidget {
       child: SizedBox(
         width: double.infinity,
         height: 400,
-        child: FadeInImage(
-          placeholder: const AssetImage('assets/jar-loading.gif'), image: NetworkImage(image),
+        child: image == null ? const Image(image: AssetImage('assets/no-image.png'), fit: BoxFit.cover,) : FadeInImage(
+          placeholder: const AssetImage('assets/jar-loading.gif'), image: NetworkImage(image!),
           fit: BoxFit.cover,
         ),
       ),
