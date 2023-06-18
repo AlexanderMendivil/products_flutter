@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:products/providers/providers.dart';
 import 'package:products/services/services.dart';
 import 'package:products/ui/input_decorations.dart';
@@ -97,6 +98,9 @@ class _ProductForm extends StatelessWidget {
               keyboardType: TextInputType.number,
               decoration: InputDecorations.authInputDecoration(hintText: '\$150', labelText: 'Precio'),
               initialValue: product.price.toString(),
+              inputFormatters: [
+                FilteringTextInputFormatter.allow(RegExp(r'^(\d+)?\.?\d{0,2}'))
+              ],
               onChanged: ( value ){
                 if(double.tryParse(value) == null){
                   product.price = 0;
@@ -108,9 +112,12 @@ class _ProductForm extends StatelessWidget {
 
             const SizedBox(height: 30),
             
-            SwitchListTile.adaptive(value: product.available, title: const Text("Disponible"), activeColor: Colors.indigo, onChanged: (value){
-
-            }),
+            SwitchListTile.adaptive(
+              value: product.available, 
+              title: const Text("Disponible"), 
+              activeColor: Colors.indigo, 
+              onChanged: productForm.updateAvailability
+            ),
 
             const SizedBox(height: 30),
           ],
