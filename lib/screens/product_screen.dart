@@ -88,6 +88,7 @@ class _ProductForm extends StatelessWidget {
                   return 'El nombre es obligatorio';
 
                 }
+                return null;
               },
             ),
             const SizedBox(height: 30),
