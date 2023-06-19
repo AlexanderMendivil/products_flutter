@@ -30,7 +30,9 @@ class Product {
         price: json["price"]?.toDouble(),
     );
 
-    Map<String, dynamic> toJson() => {
+    String toJson() => json.encode(toMap()); 
+
+    Map<String, dynamic> toMap() => {
         "available": available,
         "name": name,
         "picture": picture,
