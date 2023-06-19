@@ -40,7 +40,7 @@ Future saveOrCreateProduct( Product product ) async {
     notifyListeners();
 
     if(product.id == null){
-
+      await createProduct(product);
     }else{
       await updateProduct(product);
     }
@@ -51,9 +51,21 @@ Future saveOrCreateProduct( Product product ) async {
   Future<String> updateProduct( Product product ) async {
 
     final url = Uri.https(_baseUrl, 'products/${ product.id }.json');
-    final Response res = await http.put(url, body: product.toJson() );
-    final decodedData = res.body;
+    await http.put(url, body: product.toJson() );
     
+    final index = products.indexWhere((element) => element.id == product.id );
+    products[index] = product;
+    return product.id!;
+  }
+
+  Future<String> createProduct( Product product ) async {
+
+    final url = Uri.https(_baseUrl, 'products.json');
+    final res = await http.post(url, body: product.toJson() );
+    final decodedData = json.decode(res.body);
+    product.id = decodedData['name'];
+
+    products.add(product);
     return product.id!;
   }
 }
