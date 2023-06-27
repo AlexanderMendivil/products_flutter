@@ -1,9 +1,9 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
-import 'package:http/http.dart';
 import '../models/products.dart';
 
 class ProductsService extends ChangeNotifier{
@@ -12,6 +12,7 @@ class ProductsService extends ChangeNotifier{
   late Product selectedProduct;
   bool isLoading = true;
   bool isUpdating = false;
+  File? newPictureImage;
 
   ProductsService(){
     loadProduct();
@@ -67,5 +68,13 @@ Future saveOrCreateProduct( Product product ) async {
 
     products.add(product);
     return product.id!;
+  }
+
+  void updateSelectedProductImage(String path){
+
+    selectedProduct.picture = path; 
+    newPictureImage = File.fromUri(Uri( path: path ));
+
+    notifyListeners();
   }
 }

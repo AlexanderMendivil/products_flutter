@@ -58,10 +58,9 @@ class _ProductsScreenBody extends StatelessWidget {
                     );
 
                     if( pickedFile == null ){
-                      print("No selecciono nada");
                       return;
                     }else{
-                      print("Tenemos imagen ${pickedFile.path}");
+                      productService.updateSelectedProductImage(pickedFile.path);
                     }
                   //  Navigator.of(context).pop();
                    }, 
