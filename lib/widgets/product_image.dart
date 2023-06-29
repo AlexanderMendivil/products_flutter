@@ -46,8 +46,6 @@ class ProductImage extends StatelessWidget {
         fit: BoxFit.cover,
       );
     }
-     final test = Image.file(File(picture), fit: BoxFit.cover,);
-    return test;
-
+     return Image.file(File(picture), fit: BoxFit.cover,);
   }
 }
