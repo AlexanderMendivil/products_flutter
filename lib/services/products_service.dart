@@ -84,8 +84,7 @@ Future saveOrCreateProduct( Product product ) async {
 
     isUpdating = true;
     notifyListeners();
-
-    final url = Uri.parse('https://api.cloudinary.com/v1_1/dact0lkma/image/upload?upload_preset=umlzepjl');
+    final url = Uri.parse(dotenv.get('CLOUDINARY_URL'));
 
     final imageUploadRequest = http.MultipartRequest('POST', url);
     final file = await http.MultipartFile.fromPath('file', newPictureImage!.path);
