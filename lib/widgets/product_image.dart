@@ -39,15 +39,15 @@ class ProductImage extends StatelessWidget {
     if( picture == null ){
       return const Image(image: AssetImage('assets/no-image.png'), fit: BoxFit.cover,);  
     }
-
     if(picture.startsWith('http')){
-      FadeInImage(
+      return FadeInImage(
         image: NetworkImage(image!), 
         placeholder: const AssetImage('assets/jar-loading.gif'),
         fit: BoxFit.cover,
       );
     }
+     final test = Image.file(File(picture), fit: BoxFit.cover,);
+    return test;
 
-    return Image.file(File(picture), fit: BoxFit.cover,);
   }
 }
