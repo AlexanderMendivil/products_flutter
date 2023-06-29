@@ -77,4 +77,29 @@ Future saveOrCreateProduct( Product product ) async {
 
     notifyListeners();
   }
+
+
+  Future<String?> uploadImage() async {
+    if( newPictureImage == null ) return null;
+
+    isUpdating = true;
+    notifyListeners();
+
+    final url = Uri.parse('https://api.cloudinary.com/v1_1/dact0lkma/image/upload?upload_preset=umlzepjl');
+
+    final imageUploadRequest = http.MultipartRequest('POST', url);
+    final file = await http.MultipartFile.fromPath('file', newPictureImage!.path);
+
+    imageUploadRequest.files.add(file);
+
+    final streamResponse = await imageUploadRequest.send();
+
+    final response = await http.Response.fromStream(streamResponse);
+
+   if( response.statusCode != 200 && response.statusCode != 201 ) return null;
+
+    newPictureImage = null;
+    final decodedData = json.decode(response.body);
+    return decodedData['secure_url'];
+  }
 }
