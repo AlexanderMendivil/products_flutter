@@ -77,4 +77,28 @@ Future saveOrCreateProduct( Product product ) async {
 
     notifyListeners();
   }
+
+
+  Future<String?> uploadImage() async {
+    if( newPictureImage == null ) return null;
+
+    isUpdating = true;
+    notifyListeners();
+    final url = Uri.parse(dotenv.get('CLOUDINARY_URL'));
+
+    final imageUploadRequest = http.MultipartRequest('POST', url);
+    final file = await http.MultipartFile.fromPath('file', newPictureImage!.path);
+
+    imageUploadRequest.files.add(file);
+
+    final streamResponse = await imageUploadRequest.send();
+
+    final response = await http.Response.fromStream(streamResponse);
+
+   if( response.statusCode != 200 && response.statusCode != 201 ) return null;
+
+    newPictureImage = null;
+    final decodedData = json.decode(response.body);
+    return decodedData['secure_url'];
+  }
 }
