@@ -111,8 +111,9 @@ class _LoginForm extends StatelessWidget {
                 // ignore: use_build_context_synchronously
                 Navigator.pushReplacementNamed(context, 'home');
 
+              }else{
+                NotificationService.showSnackBar("Email o contraseña incorrectos.");
               }
-              print(response);
               loginForm.isLoading = false;
             },
             child: Container(
